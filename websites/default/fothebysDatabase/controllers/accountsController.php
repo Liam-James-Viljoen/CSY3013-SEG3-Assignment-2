@@ -14,4 +14,12 @@ class accountsController {
   		'variables' => []
   	];
 	}
+	public function loginCheck($username){
+		$accountsTable = $this->accountsTable->find('username', $username);
+		return [
+			'template' => 'login.php',
+			'title' => 'admin accounts',
+			'variables' => ['user' => $accountsTable]
+		];
+	}
 }
