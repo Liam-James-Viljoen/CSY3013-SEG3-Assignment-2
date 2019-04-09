@@ -16,7 +16,12 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 				<input type="text" name="user[username]" value="<?php echo $user['username']; ?>" />
         <label>Password</label>
 				<input type="password" name="user[password]" value="" />
-
+				<label>Access Level</label>
+				<Select name="user[access_level]">
+					<option selected="selected" value="sytem admin">System Admin</option>
+					<option selected="selected" value="administrator">Administrator</option>
+					<option selected="selected" value="evaluator">Evaluator</option>
+				</select>
 
 				<input type="submit" name="submit" value="Save Account" />
 			</form>

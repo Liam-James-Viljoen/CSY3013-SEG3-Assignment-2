@@ -7,6 +7,7 @@
 		var_dump($returnedUser);
 		if (password_verify($_POST['password'], $returnedUser['password'])){
 			$_SESSION['loggedin'] = true;
+			$_SESSION['access_level'] = $returnedUser['access_level'] ;
 		}
 
 	}
