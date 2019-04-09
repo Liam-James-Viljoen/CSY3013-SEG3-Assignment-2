@@ -4,7 +4,7 @@ class Routes implements \databaseAccess\Routes {
   public function callControllerFunction($route) {
     require '../database.php';
 
-      $accountsTable = new \databaseAccess\DatabaseTable($pdo, 'Admin_Acounts', 'id_admin_accounts');
+      $accountsTable = new \databaseAccess\DatabaseTable($pdo, 'Admin_Acounts', 'id_admin_acounts');
       $accountsController = new \fothebysDatabase\controllers\accountsController($accountsTable);
 
       if ($route == '' || $route == 'login') {
@@ -29,6 +29,15 @@ class Routes implements \databaseAccess\Routes {
       if ($route == 'logout') {
         $page = $accountsController->logout();
       }
+
+
+      if ($route == 'editAccount') {
+        $page = $accountsController->edit();
+      }
+      if ($route == 'deleteAccount') {
+        $page = $accountsController->delete();
+      }
+
       return $page;
   }
 }

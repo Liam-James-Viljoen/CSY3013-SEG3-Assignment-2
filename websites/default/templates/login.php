@@ -3,9 +3,12 @@
 
 	<?php
 	if (isset($_POST['submit'])) {
-		if ($_POST['password'] == $user[0]['password']){
+		$returnedUser = $user[0];
+		var_dump($returnedUser);
+		if (password_verify($_POST['password'], $returnedUser['password'])){
 			$_SESSION['loggedin'] = true;
 		}
+
 	}
 	if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 		//require 'sideNavigation.html';

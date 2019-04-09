@@ -38,4 +38,37 @@ class accountsController {
 			'variables' => ['user' => $accountsTable]
 		];
 	}
+
+	public function edit(){
+		if (isset($_POST['user'])) {
+				if (empty($_POST['user']['username']) || empty($_POST['user']['password'])){
+					unset($_POST);
+					header('location: editAccounts');
+				}else{
+					$_POST['user']['password']=password_hash($_POST['user']['password'], PASSWORD_DEFAULT);
+					$this->accountsTable->save($_POST['user']);
+					header('location:users');
+				}
+		}
+		else {
+			if  (isset($_GET['id_admin_acounts'])) {
+				$result = $this->accountsTable->find('id_admin_acounts', $_GET['id_admin_acounts']);
+				$user = $result[0];
+			}
+			else  {
+				$user = false;
+			}
+			$_SESSION['error']['blank'] = '';
+			return [
+				'template' => 'editAccounts.php',
+				'title' => 'edit account',
+				'variables' => ['user' => $user]
+			];
+		}
+	}
+	public function delete(){
+		$this->accountsTable->delete($_POST['id_admin_acounts']);
+
+		header('location:users');
+	}
 }

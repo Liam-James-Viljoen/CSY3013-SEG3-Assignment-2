@@ -7,7 +7,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 
 			<h2>Accounts</h2>
 
-			<a class="new" href="/admin/editAccounts">Add new account</a>
+			<a class="new" href="editAccount">Add new account</a>
 
 			<?php
 			echo '<table>';
@@ -22,9 +22,9 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 			foreach ($user as $users) {
 				echo '<tr>';
 				echo '<td>' . $users['username'] . '</td>';
-				echo '<td><a style="float: right" href="/admin/editAccounts?id=' . $users['id_admin_acounts'] . '">Edit</a></td>';
-				echo '<td><form method="post" action="/admin/deleteAccounts">
-				<input type="hidden" name="id" value="' . $users['id_admin_acounts'] . '" />
+				echo '<td><a style="float: right" href="editAccount?id_admin_acounts=' . $users['id_admin_acounts'] . '">Edit</a></td>';
+				echo '<td><form method="post" action="deleteAccount">
+				<input type="hidden" name="id_admin_acounts" value="' . $users['id_admin_acounts'] . '" />
 				<input type="submit" name="submit" value="Delete" />
 				</form></td>';
 				echo '</tr>';
@@ -36,6 +36,6 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 </section>
 <?php
 }else{
-  header('location: /admin/login');
+  header('location: login');
 }
 ?>
