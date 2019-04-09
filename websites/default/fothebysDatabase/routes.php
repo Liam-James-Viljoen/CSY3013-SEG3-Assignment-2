@@ -18,7 +18,7 @@ class Routes implements \databaseAccess\Routes {
         $page = $accountsController->userControls();
       }
       if ($route == 'items') {
-
+        
       }
       if ($route == 'categories') {
 
