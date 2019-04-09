@@ -32,10 +32,10 @@ DROP TABLE IF EXISTS `Admin_Acounts`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Admin_Acounts` (
   `id_admin_acounts` int(11) NOT NULL,
-  `admin_name` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `admin_password` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `salt` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id_admin_acounts`)
+  `username` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id_admin_acounts`),
+  UNIQUE KEY `username_UNIQUE` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -45,6 +45,7 @@ CREATE TABLE `Admin_Acounts` (
 
 LOCK TABLES `Admin_Acounts` WRITE;
 /*!40000 ALTER TABLE `Admin_Acounts` DISABLE KEYS */;
+INSERT INTO `Admin_Acounts` VALUES (1,'root','root'),(2,'root0','root0');
 /*!40000 ALTER TABLE `Admin_Acounts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -491,7 +492,7 @@ CREATE TABLE `innodb_index_stats` (
 
 LOCK TABLES `innodb_index_stats` WRITE;
 /*!40000 ALTER TABLE `innodb_index_stats` DISABLE KEYS */;
-INSERT INTO `innodb_index_stats` VALUES ('fothebyDatabase','Admin_Acounts','PRIMARY','2019-04-08 09:12:33','n_diff_pfx01',0,1,'id_admin_acounts'),('fothebyDatabase','Admin_Acounts','PRIMARY','2019-04-08 09:12:33','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fothebyDatabase','Admin_Acounts','PRIMARY','2019-04-08 09:12:33','size',1,NULL,'Number of pages in the index'),('fothebyDatabase','Categories','PRIMARY','2019-04-08 08:10:08','n_diff_pfx01',0,1,'id_categories'),('fothebyDatabase','Categories','PRIMARY','2019-04-08 08:10:08','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fothebyDatabase','Categories','PRIMARY','2019-04-08 08:10:08','size',1,NULL,'Number of pages in the index'),('fothebyDatabase','Sub_Categories','PRIMARY','2019-04-08 08:12:38','n_diff_pfx01',0,1,'id_sub_categories'),('fothebyDatabase','Sub_Categories','PRIMARY','2019-04-08 08:12:38','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fothebyDatabase','Sub_Categories','PRIMARY','2019-04-08 08:12:38','size',1,NULL,'Number of pages in the index'),('fothebyDatabase','Sub_Categories','id_categories_idx','2019-04-08 08:12:38','n_diff_pfx01',0,1,'id_categories'),('fothebyDatabase','Sub_Categories','id_categories_idx','2019-04-08 08:12:38','n_diff_pfx02',0,1,'id_categories,id_sub_categories'),('fothebyDatabase','Sub_Categories','id_categories_idx','2019-04-08 08:12:38','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fothebyDatabase','Sub_Categories','id_categories_idx','2019-04-08 08:12:38','size',1,NULL,'Number of pages in the index'),('mysql','gtid_slave_pos','PRIMARY','2017-09-26 11:09:24','n_diff_pfx01',0,1,'domain_id'),('mysql','gtid_slave_pos','PRIMARY','2017-09-26 11:09:24','n_diff_pfx02',0,1,'domain_id,sub_id'),('mysql','gtid_slave_pos','PRIMARY','2017-09-26 11:09:24','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('mysql','gtid_slave_pos','PRIMARY','2017-09-26 11:09:24','size',1,NULL,'Number of pages in the index');
+INSERT INTO `innodb_index_stats` VALUES ('fothebyDatabase','Admin_Acounts','PRIMARY','2019-04-08 14:38:28','n_diff_pfx01',1,1,'id_admin_acounts'),('fothebyDatabase','Admin_Acounts','PRIMARY','2019-04-08 14:38:28','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fothebyDatabase','Admin_Acounts','PRIMARY','2019-04-08 14:38:28','size',1,NULL,'Number of pages in the index'),('fothebyDatabase','Admin_Acounts','username_UNIQUE','2019-04-08 14:38:28','n_diff_pfx01',1,1,'username'),('fothebyDatabase','Admin_Acounts','username_UNIQUE','2019-04-08 14:38:28','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fothebyDatabase','Admin_Acounts','username_UNIQUE','2019-04-08 14:38:28','size',1,NULL,'Number of pages in the index'),('fothebyDatabase','Categories','PRIMARY','2019-04-08 08:10:08','n_diff_pfx01',0,1,'id_categories'),('fothebyDatabase','Categories','PRIMARY','2019-04-08 08:10:08','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fothebyDatabase','Categories','PRIMARY','2019-04-08 08:10:08','size',1,NULL,'Number of pages in the index'),('fothebyDatabase','Sub_Categories','PRIMARY','2019-04-08 08:12:38','n_diff_pfx01',0,1,'id_sub_categories'),('fothebyDatabase','Sub_Categories','PRIMARY','2019-04-08 08:12:38','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fothebyDatabase','Sub_Categories','PRIMARY','2019-04-08 08:12:38','size',1,NULL,'Number of pages in the index'),('fothebyDatabase','Sub_Categories','id_categories_idx','2019-04-08 08:12:38','n_diff_pfx01',0,1,'id_categories'),('fothebyDatabase','Sub_Categories','id_categories_idx','2019-04-08 08:12:38','n_diff_pfx02',0,1,'id_categories,id_sub_categories'),('fothebyDatabase','Sub_Categories','id_categories_idx','2019-04-08 08:12:38','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fothebyDatabase','Sub_Categories','id_categories_idx','2019-04-08 08:12:38','size',1,NULL,'Number of pages in the index'),('mysql','gtid_slave_pos','PRIMARY','2017-09-26 11:09:24','n_diff_pfx01',0,1,'domain_id'),('mysql','gtid_slave_pos','PRIMARY','2017-09-26 11:09:24','n_diff_pfx02',0,1,'domain_id,sub_id'),('mysql','gtid_slave_pos','PRIMARY','2017-09-26 11:09:24','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('mysql','gtid_slave_pos','PRIMARY','2017-09-26 11:09:24','size',1,NULL,'Number of pages in the index');
 /*!40000 ALTER TABLE `innodb_index_stats` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -519,7 +520,7 @@ CREATE TABLE `innodb_table_stats` (
 
 LOCK TABLES `innodb_table_stats` WRITE;
 /*!40000 ALTER TABLE `innodb_table_stats` DISABLE KEYS */;
-INSERT INTO `innodb_table_stats` VALUES ('fothebyDatabase','Admin_Acounts','2019-04-08 09:12:33',0,1,0),('fothebyDatabase','Categories','2019-04-08 08:10:08',0,1,0),('fothebyDatabase','Sub_Categories','2019-04-08 08:12:38',0,1,1),('mysql','gtid_slave_pos','2017-09-26 11:09:24',0,1,0);
+INSERT INTO `innodb_table_stats` VALUES ('fothebyDatabase','Admin_Acounts','2019-04-08 14:38:28',1,1,1),('fothebyDatabase','Categories','2019-04-08 08:10:08',0,1,0),('fothebyDatabase','Sub_Categories','2019-04-08 08:12:38',0,1,1),('mysql','gtid_slave_pos','2017-09-26 11:09:24',0,1,0);
 /*!40000 ALTER TABLE `innodb_table_stats` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1000,4 +1001,4 @@ USE `new_schema`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-08  9:45:12
+-- Dump completed on 2019-04-08 15:30:07

@@ -22,4 +22,20 @@ class accountsController {
 			'variables' => ['user' => $accountsTable]
 		];
 	}
+	public function logout(){
+		$accountsTable = $this->accountsTable->findAll();
+		return [
+			'template' => 'logout.html.php',
+			'title' => 'admin accounts',
+			'variables' => []
+		];
+	}
+	public function userControls(){
+		$accountsTable = $this->accountsTable->findAll();
+		return [
+			'template' => 'accounts.php',
+			'title' => 'admin accounts',
+			'variables' => ['user' => $accountsTable]
+		];
+	}
 }

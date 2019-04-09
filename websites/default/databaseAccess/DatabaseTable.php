@@ -19,7 +19,6 @@ class DatabaseTable {
 			'value' => $value
 		];
 		$stmt->execute($criteria);
-
 		return $stmt->fetchAll();
 	}
 

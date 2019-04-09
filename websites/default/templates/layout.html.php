@@ -14,6 +14,11 @@
 	<nav>
 		<ul>
 			<li><a href="/">Home</a></li>
+			<li><a href="users">User Controls</a></li>
+			<li><a href="items">Item Controls</a></li>
+			<li><a href="categories">Category Controls</a></li>
+			<li><a href="subcategories">Sub-Categories Controls</a></li>
+			<li><a href="logout">Logout</a></li>
 		</ul>
 	</nav>
 <main class="home">

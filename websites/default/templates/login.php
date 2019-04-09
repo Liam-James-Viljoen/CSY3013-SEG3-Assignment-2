@@ -8,7 +8,7 @@
 		}
 	}
 	if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-		//require 'adminNavigation.html';
+		//require 'sideNavigation.html';
 	?>
 
 

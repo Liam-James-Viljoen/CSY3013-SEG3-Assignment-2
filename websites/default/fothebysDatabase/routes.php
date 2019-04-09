@@ -14,6 +14,21 @@ class Routes implements \databaseAccess\Routes {
             $page = $accountsController->login();
           }
       }
+      if ($route == 'users') {
+        $page = $accountsController->userControls();
+      }
+      if ($route == 'items') {
+
+      }
+      if ($route == 'categories') {
+
+      }
+      if ($route == 'subcategories') {
+
+      }
+      if ($route == 'logout') {
+        $page = $accountsController->logout();
+      }
       return $page;
   }
 }
