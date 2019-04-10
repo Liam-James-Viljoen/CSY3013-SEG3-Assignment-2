@@ -11,7 +11,7 @@ class Routes implements \databaseAccess\Routes {
       $categoriesController = new \fothebysDatabase\controllers\categoriesController($categoriesTable);
 
       $subcategoriesTable = new \databaseAccess\DatabaseTable($pdo, 'Sub_Categories', 'id_sub_categories');
-      $subcategoriesController = new \fothebysDatabase\controllers\categoriesController($subcategoriesTable);
+      $subcategoriesController = new \fothebysDatabase\controllers\subcategoriesController($subcategoriesTable);
 
 
       if ($route == '' || $route == 'login') {
@@ -55,10 +55,12 @@ class Routes implements \databaseAccess\Routes {
 
 
       if ($route == 'subcategories') {
-        $page = $subcategoriesController->subcategories();
+        $categoryNames = $categoriesController->categoryNames();
+        $page = $subcategoriesController->subcategories($categoryNames);
       }
       if ($route == 'editSubcategories') {
-        //$page = $subcategoriesController->edit();
+        $categoryNames = $categoriesController->categoryNames();
+        $page = $subcategoriesController->edit($categoryNames);
       }
       if ($route == 'deleteSubcategories') {
         //$page = $subcategoriesController->delete();

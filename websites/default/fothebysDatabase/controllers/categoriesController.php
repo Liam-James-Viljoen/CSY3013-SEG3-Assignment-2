@@ -6,6 +6,10 @@ class categoriesController {
 	public function __construct($categoriesTable) {
 		$this->categoriesTable = $categoriesTable;
 	}
+	public function categoryNames(){
+		$categoriesTable = $this->categoriesTable->findAll();
+		return $categoriesTable;
+	}
 	public function categories(){
 		$categoriesTable = $this->categoriesTable->findAll();
 
