@@ -17,7 +17,7 @@ class categoriesController {
 	}
 	public function edit(){
 		if (isset($_POST['category'])) {
-			if (empty($_POST['category']['name'])){
+			if (empty($_POST['category']['categories_name'])){
 				unset($_POST);
 				header('location: editCategories');
 			}else{
@@ -26,9 +26,9 @@ class categoriesController {
 			}
 		}
 		else {
-			if  (isset($_GET['id'])) {
+			if  (isset($_GET['id_categories'])) {
 				//echo 'ran';
-				$result = $this->categoriesTable->find('id', $_GET['id_categories']);
+				$result = $this->categoriesTable->find('id_categories ', $_GET['id_categories']);
 				$category = $result[0];
 			}
 			else  {
@@ -42,7 +42,7 @@ class categoriesController {
 		}
 	}
 	public function delete(){
-		$this->categoriesTable->delete($_POST['id']);
+		$this->categoriesTable->delete($_POST['id_categories']);
 
 		header('location: categories');
 	}

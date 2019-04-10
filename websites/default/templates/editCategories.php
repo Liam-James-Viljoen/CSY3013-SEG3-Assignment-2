@@ -14,11 +14,11 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 		?>
 			<h2>Edit Category</h2>
 
-			<form action="/admin/editCategories" method="POST">
+			<form action="editCategories" method="POST">
 
-				<input type="hidden" name="category[id]" value="<?php echo $category['id']; ?>" />
+				<input type="hidden" name="category[id_categories]" value="<?php echo $category['id_categories']; ?>" />
 				<label>Name</label>
-				<input type="text" name="category[name]" value="<?php echo $category['name']; ?>" />
+				<input type="text" name="category[categories_name]" value="<?php echo $category['categories_name']; ?>" />
 
 
 				<input type="submit" name="submit" value="Save Category" />
@@ -30,6 +30,6 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 </section>
 <?php
 }else{
-  header('location: /admin/login');
+  header('location: login');
 }
 ?>

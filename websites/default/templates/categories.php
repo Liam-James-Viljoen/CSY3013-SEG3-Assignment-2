@@ -14,7 +14,6 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 			echo '<thead>';
 			echo '<tr>';
 			echo '<th>Category Name</th>';
-			echo '<th>Access Level</th>';
 			echo '<th style="width: 5%">&nbsp;</th>';
 			echo '<th style="width: 5%">&nbsp;</th>';
 			echo '</tr>';
@@ -23,8 +22,8 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 			foreach ($categories as $category) {
 				echo '<tr>';
 				echo '<td>' . $category['categories_name'] . '</td>';
-				echo '<td><a style="float: right" href="editAccount?id_admin_acounts=' . $category['id_categories'] . '">Edit</a></td>';
-				echo '<td><form method="post" action="deleteAccount">
+				echo '<td><a style="float: right" href="editCategories?id_categories=' . $category['id_categories'] . '">Edit</a></td>';
+				echo '<td><form method="post" action="deleteCategories">
 				<input type="hidden" name="id_categories" value="' . $category['id_categories'] . '" />
 				<input type="submit" name="submit" value="Delete" />
 				</form></td>';

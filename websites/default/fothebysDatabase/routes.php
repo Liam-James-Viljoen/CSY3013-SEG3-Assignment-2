@@ -10,6 +10,10 @@ class Routes implements \databaseAccess\Routes {
       $categoriesTable = new \databaseAccess\DatabaseTable($pdo, 'Categories', 'id_categories');
       $categoriesController = new \fothebysDatabase\controllers\categoriesController($categoriesTable);
 
+      $subcategoriesTable = new \databaseAccess\DatabaseTable($pdo, 'Sub_Categories', 'id_sub_categories');
+      $subcategoriesController = new \fothebysDatabase\controllers\categoriesController($subcategoriesTable);
+
+
       if ($route == '' || $route == 'login') {
           if (isset($_POST['submit'])) {
             $page = $accountsController->loginCheck(($_POST['username']));
@@ -20,6 +24,12 @@ class Routes implements \databaseAccess\Routes {
       if ($route == 'users') {
         $page = $accountsController->userControls();
       }
+      if ($route == 'editAccount') {
+        $page = $accountsController->edit();
+      }
+      if ($route == 'deleteAccount') {
+        $page = $accountsController->delete();
+      }
 
 
       if ($route == 'items') {
@@ -28,6 +38,10 @@ class Routes implements \databaseAccess\Routes {
       if ($route == 'editItems') {
 
       }
+      if ($route == 'deleteItems') {
+
+      }
+
 
       if ($route == 'categories') {
         $page = $categoriesController->categories();
@@ -41,19 +55,20 @@ class Routes implements \databaseAccess\Routes {
 
 
       if ($route == 'subcategories') {
-
+        $page = $subcategoriesController->subcategories();
       }
+      if ($route == 'editSubcategories') {
+        //$page = $subcategoriesController->edit();
+      }
+      if ($route == 'deleteSubcategories') {
+        //$page = $subcategoriesController->delete();
+      }
+
+
       if ($route == 'logout') {
         $page = $accountsController->logout();
       }
 
-
-      if ($route == 'editAccount') {
-        $page = $accountsController->edit();
-      }
-      if ($route == 'deleteAccount') {
-        $page = $accountsController->delete();
-      }
 
       return $page;
   }
