@@ -8,7 +8,7 @@
 	<body>
 	<header>
 		<section>
-				<h2>Fotheby's Auction House</h2>
+				<h2>Fotheby's Auction House (Admin System)</h2>
 		</section>
 	</header>
 	<nav>
@@ -16,8 +16,10 @@
 			<li><a href="/">Home</a></li>
 			<li><a href="users">Admin Controls</a></li>
 			<li><a href="items">Item Controls</a></li>
+			<li><a href="classification">Classification Controls</a></li>
 			<li><a href="categories">Category Controls</a></li>
 			<li><a href="subcategories">Sub-Categories Controls</a></li>
+			<li><a href="auctions">Auction Controls</a></li>
 			<li><a href="logout">Logout</a></li>
 		</ul>
 	</nav>

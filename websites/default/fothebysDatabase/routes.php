@@ -7,11 +7,20 @@ class Routes implements \databaseAccess\Routes {
       $accountsTable = new \databaseAccess\DatabaseTable($pdo, 'Admin_Acounts', 'id_admin_acounts');
       $accountsController = new \fothebysDatabase\controllers\accountsController($accountsTable);
 
+      $itemsTable = new \databaseAccess\DatabaseTable($pdo, 'Items', 'id_items');
+      //$itemsController = new \fothebysDatabase\controllers\itemsController($itemsTable);
+
+      $classificationTable = new \databaseAccess\DatabaseTable($pdo, 'Classifications', 'id_classifications');
+      $classificationController = new \fothebysDatabase\controllers\classificationsController($classificationTable);
+
       $categoriesTable = new \databaseAccess\DatabaseTable($pdo, 'Categories', 'id_categories');
       $categoriesController = new \fothebysDatabase\controllers\categoriesController($categoriesTable);
 
       $subcategoriesTable = new \databaseAccess\DatabaseTable($pdo, 'Sub_Categories', 'id_sub_categories');
       $subcategoriesController = new \fothebysDatabase\controllers\subcategoriesController($subcategoriesTable);
+
+      $auctionsTable = new \databaseAccess\DatabaseTable($pdo, 'Auctions', 'id_auctions');
+      $auctionsController = new \fothebysDatabase\controllers\auctionsController($auctionsTable);
 
 
       if ($route == '' || $route == 'login') {
@@ -40,6 +49,28 @@ class Routes implements \databaseAccess\Routes {
       }
       if ($route == 'deleteItems') {
 
+      }
+
+
+      if ($route == 'classification') {
+        $page = $classificationController->classification();
+      }
+      if ($route == 'editClassification') {
+        $page = $classificationController->edit();
+      }
+      if ($route == 'deleteClassification') {
+        $page = $classificationController->delete();
+      }
+
+
+      if ($route == 'auctions') {
+        $page = $auctionsController->auctions();
+      }
+      if ($route == 'editAuction') {
+        $page = $auctionsController->edit();
+      }
+      if ($route == 'deleteAuction') {
+        $page = $auctionsController->delete();
       }
 
 
