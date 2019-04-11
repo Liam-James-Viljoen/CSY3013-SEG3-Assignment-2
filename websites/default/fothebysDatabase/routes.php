@@ -45,10 +45,13 @@ class Routes implements \databaseAccess\Routes {
         $page = $itemsController->items();
       }
       if ($route == 'editItems') {
-
+        $classifications = $classificationController->returnClassifications();
+        $categoryNames = $categoriesController->categoryNames();
+        $subcategoryNames = $subcategoriesController->returnSubCategories();
+        $page = $itemsController->edit($classifications, $categoryNames, $subcategoryNames);
       }
       if ($route == 'deleteItems') {
-
+        $page = $itemsController->delete();
       }
 
 

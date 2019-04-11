@@ -6,7 +6,10 @@ class classificationsController {
 	public function __construct($classificationsTable) {
 		$this->classificationsTable = $classificationsTable;
 	}
-
+	public function returnClassifications(){
+		$classificationsTable = $this->classificationsTable->findAll();
+		return $classificationsTable;
+	}
 	public function classification(){
 		$classificationsTable = $this->classificationsTable->findAll();
 

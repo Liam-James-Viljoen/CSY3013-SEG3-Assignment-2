@@ -6,6 +6,11 @@ class subcategoriesController {
 	public function __construct($subcategoriesTable) {
 		$this->subcategoriesTable = $subcategoriesTable;
 	}
+
+	public function returnSubCategories(){
+		$subcategoriesTable = $this->subcategoriesTable->findAll();
+		return $subcategoriesTable;
+	}
 	public function subcategories($categoryNames){
 		$subcategoriesTable = $this->subcategoriesTable->findAll();
 

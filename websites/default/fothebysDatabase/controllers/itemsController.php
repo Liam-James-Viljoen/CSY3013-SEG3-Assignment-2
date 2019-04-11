@@ -21,35 +21,35 @@ class itemsController {
 
 
 
-	public function edit(){
-		if (isset($_POST['category'])) {
-			if (empty($_POST['category']['categories_name'])){
+	public function edit($classifications, $categoryNames, $subcategoryNames){
+		if (isset($_POST['items'])) {
+			if (empty($_POST['items']['item_name'])){
 				unset($_POST);
-				header('location: editCategories');
+				header('location: editItems');
 			}else{
-				$this->categoriesTable->save($_POST['category']);
-				header('location: categories');
+				$this->itemsTable->save($_POST['items']);
+				header('location: items');
 			}
 		}
 		else {
-			if  (isset($_GET['id_categories'])) {
+			if  (isset($_GET['id_items'])) {
 				//echo 'ran';
-				$result = $this->categoriesTable->find('id_categories ', $_GET['id_categories']);
-				$category = $result[0];
+				$result = $this->itemsTable->find('id_items ', $_GET['id_items']);
+				$items = $result[0];
 			}
 			else  {
-				$category = false;
+				$items= false;
 			}
 			return [
-				'template' => 'editCategories.php',
-				'title' => 'edit category',
-				'variables' => ['category' => $category]
+				'template' => 'editItems.php',
+				'title' => 'edit items',
+				'variables' => ['items' => $items, 'classifications' => $classifications, 'categories' => $categoryNames, 'subcategories' => $subcategoryNames]
 			];
 		}
 	}
 	public function delete(){
-		$this->categoriesTable->delete($_POST['id_categories']);
+		$this->categoriesTable->delete($_POST['id_items']);
 
-		header('location: categories');
+		header('location: items');
 	}
 }
