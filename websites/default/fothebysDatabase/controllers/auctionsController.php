@@ -6,6 +6,10 @@ class auctionsController {
 	public function __construct($auctionsTable) {
 		$this->auctionsTable = $auctionsTable;
 	}
+	public function returnAuctions(){
+		$auctionsTable = $this->auctionsTable->findAll();
+		return $auctionsTable;
+	}
 	public function auctions(){
 		$auctionsTable = $this->auctionsTable->findAll();
 

@@ -61,8 +61,26 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
           </select>
 
         <Label>Year of production</label>
-        <input type="number" name="items[year_of_production]" min="1200" max="5000" step="1" value="2019" />
-        
+        <input type="number" name="items[year_of_production]" min="1200" max="5000" step="1" value="<?php echo $items['year_of_production']; ?>" />
+
+				<Label>Height (cm)</label>
+				<input type="number" name="items[height]" min="0" step="1" value="<?php echo $items['height']; ?>" />
+
+				<Label>Length (cm)</label>
+				<input type="number" name="items[lengh]" min="0" step="1" value="<?php echo $items['lengh']; ?>" />
+
+				<Label>Approximate Weight (kg)</label>
+				<input type="number" name="items[aprox_weight]" min="0" step="1" value"<?php echo $items['aprox_weight']; ?>" />
+
+				<Label>Estimated Price (£)</label>
+				<input type="number" name="items[estimated_price]" min="00.00" step="1000.00" value="<?php echo $items['estimated_price']; ?>" />
+
+				<Label>Description</label>
+				<textarea name="items[description]" rows="10" cols="30" value="<?php echo $items['description']; ?>"> </textarea>
+
+				<Label>Assigned Auction</label>
+
+				
 				<input type="submit" name="submit" value="Save Item" />
 
 			</form>

@@ -21,7 +21,7 @@ class itemsController {
 
 
 
-	public function edit($classifications, $categoryNames, $subcategoryNames){
+	public function edit($classifications, $categoryNames, $subcategoryNames, $auctionNames){
 		if (isset($_POST['items'])) {
 			if (empty($_POST['items']['item_name'])){
 				unset($_POST);
@@ -43,7 +43,7 @@ class itemsController {
 			return [
 				'template' => 'editItems.php',
 				'title' => 'edit items',
-				'variables' => ['items' => $items, 'classifications' => $classifications, 'categories' => $categoryNames, 'subcategories' => $subcategoryNames]
+				'variables' => ['items' => $items, 'classifications' => $classifications, 'categories' => $categoryNames, 'subcategories' => $subcategoryNames, 'auctions' => $auctionNames]
 			];
 		}
 	}

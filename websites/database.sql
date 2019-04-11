@@ -60,10 +60,10 @@ DROP TABLE IF EXISTS `Auctions`;
 CREATE TABLE `Auctions` (
   `id_auctions` int(11) NOT NULL AUTO_INCREMENT,
   `auction_name` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `date` datetime DEFAULT NULL,
-  `time` datetime DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `time` time DEFAULT NULL,
   PRIMARY KEY (`id_auctions`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,6 +72,7 @@ CREATE TABLE `Auctions` (
 
 LOCK TABLES `Auctions` WRITE;
 /*!40000 ALTER TABLE `Auctions` DISABLE KEYS */;
+INSERT INTO `Auctions` VALUES (2,'The Prime Auction','2019-04-27','13:30:00');
 /*!40000 ALTER TABLE `Auctions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -97,6 +98,30 @@ LOCK TABLES `Categories` WRITE;
 /*!40000 ALTER TABLE `Categories` DISABLE KEYS */;
 INSERT INTO `Categories` VALUES (3,'Drawing'),(4,'Painting'),(5,'Photographic Image'),(6,'Sculpture'),(7,'Carving');
 /*!40000 ALTER TABLE `Categories` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Classifications`
+--
+
+DROP TABLE IF EXISTS `Classifications`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Classifications` (
+  `id_classifications` int(11) NOT NULL AUTO_INCREMENT,
+  `classification_name` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id_classifications`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Classifications`
+--
+
+LOCK TABLES `Classifications` WRITE;
+/*!40000 ALTER TABLE `Classifications` DISABLE KEYS */;
+INSERT INTO `Classifications` VALUES (2,'Landscape'),(3,'Seascape'),(4,'Portrait'),(5,'Figure'),(6,'Still life'),(7,'Nude'),(8,'Animal'),(9,'Abstract'),(10,'Other');
+/*!40000 ALTER TABLE `Classifications` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -135,25 +160,18 @@ DROP TABLE IF EXISTS `Items`;
 CREATE TABLE `Items` (
   `id_items` int(11) NOT NULL AUTO_INCREMENT,
   `item_name` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `artist_name` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `classification` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `category` int(11) NOT NULL,
+  `sub_category` int(11) NOT NULL,
   `year_of_production` datetime DEFAULT NULL,
-  `id_categories_items` int(11) NOT NULL,
-  `id_sub_categories_items` int(11) NOT NULL,
   `height` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `lengh` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `aprox_weight` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `estimated_price` double DEFAULT NULL,
   `description` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `id_auctions_items` int(11) NOT NULL,
-  `id_customers_items` int(11) NOT NULL,
-  PRIMARY KEY (`id_items`),
-  KEY `id_sub_categories_items_idx` (`id_sub_categories_items`),
-  KEY `id_auctions_items_idx` (`id_auctions_items`),
-  KEY `id_customers_items_idx` (`id_customers_items`),
-  KEY `id_categories_items_idx` (`id_categories_items`),
-  CONSTRAINT `id_auctions_items` FOREIGN KEY (`id_auctions_items`) REFERENCES `Auctions` (`id_auctions`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `id_categories_items` FOREIGN KEY (`id_categories_items`) REFERENCES `Categories` (`id_categories`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `id_customers_items` FOREIGN KEY (`id_customers_items`) REFERENCES `Customers` (`id_customers`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `id_sub_categories_items` FOREIGN KEY (`id_sub_categories_items`) REFERENCES `Sub_Categories` (`id_sub_categories`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  `auction_name` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id_items`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -587,7 +605,7 @@ CREATE TABLE `innodb_index_stats` (
 
 LOCK TABLES `innodb_index_stats` WRITE;
 /*!40000 ALTER TABLE `innodb_index_stats` DISABLE KEYS */;
-INSERT INTO `innodb_index_stats` VALUES ('fothebyDatabase','Admin_Acounts','PRIMARY','2019-04-09 08:44:10','n_diff_pfx01',2,1,'id_admin_acounts'),('fothebyDatabase','Admin_Acounts','PRIMARY','2019-04-09 08:44:10','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fothebyDatabase','Admin_Acounts','PRIMARY','2019-04-09 08:44:10','size',1,NULL,'Number of pages in the index'),('fothebyDatabase','Admin_Acounts','username_UNIQUE','2019-04-09 08:44:10','n_diff_pfx01',2,1,'username'),('fothebyDatabase','Admin_Acounts','username_UNIQUE','2019-04-09 08:44:10','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fothebyDatabase','Admin_Acounts','username_UNIQUE','2019-04-09 08:44:10','size',1,NULL,'Number of pages in the index'),('fothebyDatabase','Auctions','PRIMARY','2019-04-09 09:22:06','n_diff_pfx01',0,1,'id_auctions'),('fothebyDatabase','Auctions','PRIMARY','2019-04-09 09:22:06','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fothebyDatabase','Auctions','PRIMARY','2019-04-09 09:22:06','size',1,NULL,'Number of pages in the index'),('fothebyDatabase','Categories','PRIMARY','2019-04-10 08:11:34','n_diff_pfx01',5,1,'id_categories'),('fothebyDatabase','Categories','PRIMARY','2019-04-10 08:11:34','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fothebyDatabase','Categories','PRIMARY','2019-04-10 08:11:34','size',1,NULL,'Number of pages in the index'),('fothebyDatabase','Customers','PRIMARY','2019-04-09 09:31:31','n_diff_pfx01',0,1,'id_customers'),('fothebyDatabase','Customers','PRIMARY','2019-04-09 09:31:31','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fothebyDatabase','Customers','PRIMARY','2019-04-09 09:31:31','size',1,NULL,'Number of pages in the index'),('fothebyDatabase','Items','PRIMARY','2019-04-10 09:29:49','n_diff_pfx01',0,1,'id_items'),('fothebyDatabase','Items','PRIMARY','2019-04-10 09:29:49','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fothebyDatabase','Items','PRIMARY','2019-04-10 09:29:49','size',1,NULL,'Number of pages in the index'),('fothebyDatabase','Items','id_auctions_items_idx','2019-04-10 09:29:49','n_diff_pfx01',0,1,'id_auctions_items'),('fothebyDatabase','Items','id_auctions_items_idx','2019-04-10 09:29:49','n_diff_pfx02',0,1,'id_auctions_items,id_items'),('fothebyDatabase','Items','id_auctions_items_idx','2019-04-10 09:29:49','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fothebyDatabase','Items','id_auctions_items_idx','2019-04-10 09:29:49','size',1,NULL,'Number of pages in the index'),('fothebyDatabase','Items','id_categories_items_idx','2019-04-10 09:29:49','n_diff_pfx01',0,1,'id_categories_items'),('fothebyDatabase','Items','id_categories_items_idx','2019-04-10 09:29:49','n_diff_pfx02',0,1,'id_categories_items,id_items'),('fothebyDatabase','Items','id_categories_items_idx','2019-04-10 09:29:49','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fothebyDatabase','Items','id_categories_items_idx','2019-04-10 09:29:49','size',1,NULL,'Number of pages in the index'),('fothebyDatabase','Items','id_customers_items_idx','2019-04-10 09:29:49','n_diff_pfx01',0,1,'id_customers_items'),('fothebyDatabase','Items','id_customers_items_idx','2019-04-10 09:29:49','n_diff_pfx02',0,1,'id_customers_items,id_items'),('fothebyDatabase','Items','id_customers_items_idx','2019-04-10 09:29:49','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fothebyDatabase','Items','id_customers_items_idx','2019-04-10 09:29:49','size',1,NULL,'Number of pages in the index'),('fothebyDatabase','Items','id_sub_categories_items_idx','2019-04-10 09:29:49','n_diff_pfx01',0,1,'id_sub_categories_items'),('fothebyDatabase','Items','id_sub_categories_items_idx','2019-04-10 09:29:49','n_diff_pfx02',0,1,'id_sub_categories_items,id_items'),('fothebyDatabase','Items','id_sub_categories_items_idx','2019-04-10 09:29:49','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fothebyDatabase','Items','id_sub_categories_items_idx','2019-04-10 09:29:49','size',1,NULL,'Number of pages in the index'),('fothebyDatabase','Sub_Categories','PRIMARY','2019-04-10 09:30:27','n_diff_pfx01',19,1,'id_sub_categories'),('fothebyDatabase','Sub_Categories','PRIMARY','2019-04-10 09:30:27','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fothebyDatabase','Sub_Categories','PRIMARY','2019-04-10 09:30:27','size',1,NULL,'Number of pages in the index'),('fothebyDatabase','Sub_Categories','id_categories_sub_categories_idx','2019-04-10 09:30:27','n_diff_pfx01',5,1,'id_categories_sub_categories'),('fothebyDatabase','Sub_Categories','id_categories_sub_categories_idx','2019-04-10 09:30:27','n_diff_pfx02',19,1,'id_categories_sub_categories,id_sub_categories'),('fothebyDatabase','Sub_Categories','id_categories_sub_categories_idx','2019-04-10 09:30:27','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fothebyDatabase','Sub_Categories','id_categories_sub_categories_idx','2019-04-10 09:30:27','size',1,NULL,'Number of pages in the index'),('mysql','gtid_slave_pos','PRIMARY','2017-09-26 11:09:24','n_diff_pfx01',0,1,'domain_id'),('mysql','gtid_slave_pos','PRIMARY','2017-09-26 11:09:24','n_diff_pfx02',0,1,'domain_id,sub_id'),('mysql','gtid_slave_pos','PRIMARY','2017-09-26 11:09:24','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('mysql','gtid_slave_pos','PRIMARY','2017-09-26 11:09:24','size',1,NULL,'Number of pages in the index');
+INSERT INTO `innodb_index_stats` VALUES ('fothebyDatabase','Admin_Acounts','PRIMARY','2019-04-09 08:44:10','n_diff_pfx01',2,1,'id_admin_acounts'),('fothebyDatabase','Admin_Acounts','PRIMARY','2019-04-09 08:44:10','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fothebyDatabase','Admin_Acounts','PRIMARY','2019-04-09 08:44:10','size',1,NULL,'Number of pages in the index'),('fothebyDatabase','Admin_Acounts','username_UNIQUE','2019-04-09 08:44:10','n_diff_pfx01',2,1,'username'),('fothebyDatabase','Admin_Acounts','username_UNIQUE','2019-04-09 08:44:10','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fothebyDatabase','Admin_Acounts','username_UNIQUE','2019-04-09 08:44:10','size',1,NULL,'Number of pages in the index'),('fothebyDatabase','Auctions','PRIMARY','2019-04-11 07:55:32','n_diff_pfx01',2,1,'id_auctions'),('fothebyDatabase','Auctions','PRIMARY','2019-04-11 07:55:32','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fothebyDatabase','Auctions','PRIMARY','2019-04-11 07:55:32','size',1,NULL,'Number of pages in the index'),('fothebyDatabase','Categories','PRIMARY','2019-04-11 07:20:39','n_diff_pfx01',5,1,'id_categories'),('fothebyDatabase','Categories','PRIMARY','2019-04-11 07:20:39','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fothebyDatabase','Categories','PRIMARY','2019-04-11 07:20:39','size',1,NULL,'Number of pages in the index'),('fothebyDatabase','Classifications','PRIMARY','2019-04-11 08:39:23','n_diff_pfx01',8,1,'id_classifications'),('fothebyDatabase','Classifications','PRIMARY','2019-04-11 08:39:23','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fothebyDatabase','Classifications','PRIMARY','2019-04-11 08:39:23','size',1,NULL,'Number of pages in the index'),('fothebyDatabase','Customers','PRIMARY','2019-04-09 09:31:31','n_diff_pfx01',0,1,'id_customers'),('fothebyDatabase','Customers','PRIMARY','2019-04-09 09:31:31','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fothebyDatabase','Customers','PRIMARY','2019-04-09 09:31:31','size',1,NULL,'Number of pages in the index'),('fothebyDatabase','Items','PRIMARY','2019-04-11 10:51:08','n_diff_pfx01',0,1,'id_items'),('fothebyDatabase','Items','PRIMARY','2019-04-11 10:51:08','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fothebyDatabase','Items','PRIMARY','2019-04-11 10:51:08','size',1,NULL,'Number of pages in the index'),('fothebyDatabase','Sub_Categories','PRIMARY','2019-04-11 07:20:29','n_diff_pfx01',19,1,'id_sub_categories'),('fothebyDatabase','Sub_Categories','PRIMARY','2019-04-11 07:20:29','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fothebyDatabase','Sub_Categories','PRIMARY','2019-04-11 07:20:29','size',1,NULL,'Number of pages in the index'),('fothebyDatabase','Sub_Categories','id_categories_sub_categories_idx','2019-04-11 07:20:29','n_diff_pfx01',5,1,'id_categories_sub_categories'),('fothebyDatabase','Sub_Categories','id_categories_sub_categories_idx','2019-04-11 07:20:29','n_diff_pfx02',19,1,'id_categories_sub_categories,id_sub_categories'),('fothebyDatabase','Sub_Categories','id_categories_sub_categories_idx','2019-04-11 07:20:29','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('fothebyDatabase','Sub_Categories','id_categories_sub_categories_idx','2019-04-11 07:20:29','size',1,NULL,'Number of pages in the index'),('mysql','gtid_slave_pos','PRIMARY','2017-09-26 11:09:24','n_diff_pfx01',0,1,'domain_id'),('mysql','gtid_slave_pos','PRIMARY','2017-09-26 11:09:24','n_diff_pfx02',0,1,'domain_id,sub_id'),('mysql','gtid_slave_pos','PRIMARY','2017-09-26 11:09:24','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('mysql','gtid_slave_pos','PRIMARY','2017-09-26 11:09:24','size',1,NULL,'Number of pages in the index');
 /*!40000 ALTER TABLE `innodb_index_stats` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -615,7 +633,7 @@ CREATE TABLE `innodb_table_stats` (
 
 LOCK TABLES `innodb_table_stats` WRITE;
 /*!40000 ALTER TABLE `innodb_table_stats` DISABLE KEYS */;
-INSERT INTO `innodb_table_stats` VALUES ('fothebyDatabase','Admin_Acounts','2019-04-09 08:44:10',2,1,1),('fothebyDatabase','Auctions','2019-04-09 09:22:06',0,1,0),('fothebyDatabase','Categories','2019-04-10 08:11:34',5,1,0),('fothebyDatabase','Customers','2019-04-09 09:31:31',0,1,0),('fothebyDatabase','Items','2019-04-10 09:29:49',0,1,4),('fothebyDatabase','Sub_Categories','2019-04-10 09:30:27',19,1,1),('mysql','gtid_slave_pos','2017-09-26 11:09:24',0,1,0);
+INSERT INTO `innodb_table_stats` VALUES ('fothebyDatabase','Admin_Acounts','2019-04-09 08:44:10',2,1,1),('fothebyDatabase','Auctions','2019-04-11 07:55:32',2,1,0),('fothebyDatabase','Categories','2019-04-11 07:20:39',5,1,0),('fothebyDatabase','Classifications','2019-04-11 08:39:23',8,1,0),('fothebyDatabase','Customers','2019-04-09 09:31:31',0,1,0),('fothebyDatabase','Items','2019-04-11 10:51:08',0,1,0),('fothebyDatabase','Sub_Categories','2019-04-11 07:20:29',19,1,1),('mysql','gtid_slave_pos','2017-09-26 11:09:24',0,1,0);
 /*!40000 ALTER TABLE `innodb_table_stats` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1096,4 +1114,4 @@ USE `new_schema`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-10  9:32:31
+-- Dump completed on 2019-04-11 14:57:36

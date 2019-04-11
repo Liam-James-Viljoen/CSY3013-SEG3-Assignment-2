@@ -48,7 +48,8 @@ class Routes implements \databaseAccess\Routes {
         $classifications = $classificationController->returnClassifications();
         $categoryNames = $categoriesController->categoryNames();
         $subcategoryNames = $subcategoriesController->returnSubCategories();
-        $page = $itemsController->edit($classifications, $categoryNames, $subcategoryNames);
+        $auctionNames = $auctionsController->returnAuctions();
+        $page = $itemsController->edit($classifications, $categoryNames, $subcategoryNames, $auctionNames);
       }
       if ($route == 'deleteItems') {
         $page = $itemsController->delete();
