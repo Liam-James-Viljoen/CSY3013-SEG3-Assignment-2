@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 ?>
 
@@ -36,18 +37,33 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
         <Select name="items[category]">
         <?php
         foreach ($categories as $category){ if ($items['category'] == $category['categories_name']){ ?>
-            <option selected="selected" value="<?=$category['categories_name'] ?? ''?>"><?=$category['categories_name'] ?? ''?></option>
+            <option selected="selected" value="<?=$category['id_categories'] ?? ''?>"><?=$category['categories_name'] ?? ''?></option>
           <?php } else { ?>
-            <option value="<?=$category['categories_name'] ?? ''?>"><?=$category['categories_name'] ?? ''?></option>
+            <option value="<?=$category['id_categories'] ?? ''?>"><?=$category['categories_name'] ?? ''?></option>
         <?php } } ?>
         </select>
 
+        <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+        <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+        <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+        <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX Need to figure out how to filter select box dynamically (Currently only god knows) XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
         <Label>Sub-Categories</label>
+          <Select name="items[sub_category]">
+          <?php foreach ($categories as $category){ ?>
+                  <optgroup label="<?=$category['categories_name'] ?? ''?>">
+                          <?php foreach ($subcategories as $subcategory) { ?>
+                                <?php if ($subcategory['id_categories_sub_categories'] == $category['id_categories']){?>
+                                      <option value="<?=$subcategory['sub_category_name'] ?? ''?>"><?=$subcategory['sub_category_name'] ?? ''?></option>
+                                <?php } ?>
+                          <?php } ?>
+                  <?php } ?>
+                  </optgroup>
+          </select>
 
-
-
-
-				<input type="submit" name="submit" value="Save Category" />
+        <Label>Year of production</label>
+        <input type="number" name="items[year_of_production]" min="1200" max="5000" step="1" value="2019" />
+        
+				<input type="submit" name="submit" value="Save Item" />
 
 			</form>
 <?php
@@ -55,7 +71,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 ?>
 </section>
 <?php
-}else{
+} else {
   header('location: login');
 }
 ?>
