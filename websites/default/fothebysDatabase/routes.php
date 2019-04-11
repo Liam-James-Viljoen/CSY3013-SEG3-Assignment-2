@@ -8,7 +8,7 @@ class Routes implements \databaseAccess\Routes {
       $accountsController = new \fothebysDatabase\controllers\accountsController($accountsTable);
 
       $itemsTable = new \databaseAccess\DatabaseTable($pdo, 'Items', 'id_items');
-      //$itemsController = new \fothebysDatabase\controllers\itemsController($itemsTable);
+      $itemsController = new \fothebysDatabase\controllers\itemsController($itemsTable);
 
       $classificationTable = new \databaseAccess\DatabaseTable($pdo, 'Classifications', 'id_classifications');
       $classificationController = new \fothebysDatabase\controllers\classificationsController($classificationTable);
@@ -42,7 +42,7 @@ class Routes implements \databaseAccess\Routes {
 
 
       if ($route == 'items') {
-
+        $page = $itemsController->items();
       }
       if ($route == 'editItems') {
 
