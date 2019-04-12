@@ -4,8 +4,6 @@ class Routes implements \databaseAccess\Routes {
   public function callControllerFunction($route) {
     require '../database.php';
 
-      $accountsTable = new \databaseAccess\DatabaseTable($pdo, 'Admin_Acounts', 'id_admin_acounts');
-      $accountsController = new \fothebysDatabase\controllers\accountsController($accountsTable);
 
       $itemsTable = new \databaseAccess\DatabaseTable($pdo, 'Items', 'id_items');
       $itemsController = new \fothebysDatabase\controllers\itemsController($itemsTable);
