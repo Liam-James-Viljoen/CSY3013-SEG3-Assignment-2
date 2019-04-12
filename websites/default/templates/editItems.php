@@ -79,8 +79,15 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 				<textarea name="items[description]" rows="10" cols="30" value="<?php echo $items['description']; ?>"> </textarea>
 
 				<Label>Assigned Auction</label>
+					<Select name="items[assigned_auction]">
+	        <?php
+	        foreach ($auctions as $auction){ if ($items['assigned_auction'] == $auction['id_auctions']){ ?>
+	            <option selected="selected" value="<?=$auction['id_categories'] ?? ''?>"><?=$auction['auction_name'] ?? ''?> . ' - ' . <?=$auction['date'] ?? ''?> . ' - ' . <?=$auction['time'] ?? ''?></option>
+	          <?php } else { ?>
+	            <option value="<?=$auction['id_auctions'] ?? ''?>"><?=$auction['auction_name'] ?? ''?> : <?=$auction['date'] ?? ''?> - <?=$auction['time'] ?? ''?></option>
+	        <?php } } ?>
+	        </select>
 
-				
 				<input type="submit" name="submit" value="Save Item" />
 
 			</form>

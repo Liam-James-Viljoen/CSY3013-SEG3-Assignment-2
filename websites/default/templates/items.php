@@ -16,6 +16,10 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 			echo '<th>Item Name</th>';
       echo '<th>Artist Name</th>';
       echo '<th>Year Of Production</th>';
+			echo '<th>Height (cm)</th>';
+			echo '<th>Length (cm)</th>';
+			echo '<th>Aproximate Weight (kg)</th>';
+			echo '<th>Estimated Price (£)</th>';
 			echo '<th style="width: 5%">&nbsp;</th>';
 			echo '<th style="width: 5%">&nbsp;</th>';
 			echo '</tr>';
@@ -26,17 +30,9 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 				echo '<td>' . $item['item_name'] . '</td>';
 				echo '<td>' . $item['artist_name'] . '</td>';
         echo '<td>' . $item['year_of_production'] . '</td>';
-
-        if ($item['height'] != null){
-          echo '<td>' . $item['height'] . '</td>';
-        }
-        if ($item['lengh'] != null){
-          echo '<td>' . $item['lengh'] . '</td>';
-        }
-        if ($item['aprox_weight'] != null){
-          echo '<td>' . $item['aprox_weight'] . '</td>';
-        }
-
+				echo '<td>' . $item['height'] . '</td>';
+				echo '<td>' . $item['lengh'] . '</td>';
+        echo '<td>' . $item['aprox_weight'] . '</td>';
         echo '<td>' . $item['estimated_price'] . '</td>';
 
 				echo '<td><a style="float: right" href="editItems?id_items=' . $item['id_items'] . '">Edit</a></td>';
