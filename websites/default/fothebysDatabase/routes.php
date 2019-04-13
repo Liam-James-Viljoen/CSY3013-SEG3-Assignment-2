@@ -106,7 +106,6 @@ class Routes implements \databaseAccess\Routes {
         $page = $accountsController->logout();
       }
 
-
       return $page;
   }
 }
