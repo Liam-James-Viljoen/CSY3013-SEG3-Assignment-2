@@ -24,7 +24,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 	echo '<label>Categories: </label>';
 	echo '<Select name="sortBy[category]">';
 	foreach ($categories as $category){ ?>
-			<option value="<?=$category['categories_name'] ?? ''?>"><?=$category['categories_name'] ?? ''?></option>
+			<option value="<?=$category['id_categories'] ?? ''?>"><?=$category['categories_name'] ?? ''?></option>
 	<?php };
 	echo '</select>';
 	echo '<input type="submit" name="submit" value="Sort" />';
@@ -86,42 +86,131 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 			echo '<th style="width: 5%">&nbsp;</th>';
 			echo '</tr>';
 
-
-			foreach ($items as $item) {
-				echo '<tr>';
-				echo '<td>' . $item['item_name'] . '</td>';
-				echo '<td>' . $item['classification'] . '</td>';
-
-				foreach ($categories as $category) {
-					if ($category['id_categories'] == $item['category']){
-						echo '<td>' . $category['categories_name'] . '</td>';
+			if (isset($_POST['sortBy']['classification'])){//Filter for classification
+				foreach ($items as $item) {
+					if ($item['classification']==$_POST['sortBy']['classification']){
+						echo '<tr>';
+						echo '<td>' . $item['item_name'] . '</td>';
+						echo '<td>' . $item['classification'] . '</td>';
+						foreach ($categories as $category) {
+							if ($category['id_categories'] == $item['category']){
+								echo '<td>' . $category['categories_name'] . '</td>';
+							}
+						}
+						foreach ($subcategories as $subcategory) {
+							if ($subcategory['id_sub_categories'] == $item['sub_category']){
+								echo '<td>' . $subcategory['sub_category_name'] . '</td>';
+							}
+						}
+						echo '<td>' . $item['artist_name'] . '</td>';
+						echo '<td>' . $item['year_of_production'] . '</td>';
+						echo '<td>' . '£' .$item['estimated_price'] . '</td>';
+						echo '<td><a style="float: right" href="editItems?id_items=' . $item['id_items'] . '">Edit</a></td>';
+						echo '<td><form method="post" action="deleteItems">
+						<input type="hidden" name="id_items" value="' . $item['id_items'] . '" />
+						<input type="submit" name="submit" value="Delete" />
+						</form></td>';
+						echo '</tr>';
 					}
-				}
-
-				foreach ($subcategories as $subcategory) {
-					if ($subcategory['id_sub_categories'] == $item['sub_category']){
-						echo '<td>' . $subcategory['sub_category_name'] . '</td>';
 					}
+					echo '</thead>';
+					echo '</table>';
+
+			}elseif (isset($_POST['sortBy']['category'])){ //Filter for category
+				foreach ($items as $item) {
+					if ($item['category']==$_POST['sortBy']['category']){
+					echo '<tr>';
+					echo '<td>' . $item['item_name'] . '</td>';
+					echo '<td>' . $item['classification'] . '</td>';
+					foreach ($categories as $category) {
+						if ($category['id_categories'] == $item['category']){
+							echo '<td>' . $category['categories_name'] . '</td>';
+						}
+					}
+					foreach ($subcategories as $subcategory) {
+						if ($subcategory['id_sub_categories'] == $item['sub_category']){
+							echo '<td>' . $subcategory['sub_category_name'] . '</td>';
+						}
+					}
+					echo '<td>' . $item['artist_name'] . '</td>';
+					echo '<td>' . $item['year_of_production'] . '</td>';
+					echo '<td>' . '£' .$item['estimated_price'] . '</td>';
+					echo '<td><a style="float: right" href="editItems?id_items=' . $item['id_items'] . '">Edit</a></td>';
+					echo '<td><form method="post" action="deleteItems">
+					<input type="hidden" name="id_items" value="' . $item['id_items'] . '" />
+					<input type="submit" name="submit" value="Delete" />
+					</form></td>';
+					echo '</tr>';
 				}
+			}
+				echo '</thead>';
+				echo '</table>';
 
-				echo '<td>' . $item['artist_name'] . '</td>';
-        echo '<td>' . $item['year_of_production'] . '</td>';
-        echo '<td>' . '£' .$item['estimated_price'] . '</td>';
 
 
-				echo '<td><a style="float: right" href="editItems?id_items=' . $item['id_items'] . '">Edit</a></td>';
-				echo '<td><form method="post" action="deleteItems">
-				<input type="hidden" name="id_items" value="' . $item['id_items'] . '" />
-				<input type="submit" name="submit" value="Delete" />
-				</form></td>';
-				echo '</tr>';
+			}elseif  (isset($_POST['sortBy']['sub_category'])){ //Filter for sub category
+				foreach ($items as $item) {
+					if ($item['sub_category']==$_POST['sortBy']['sub_category']){
+					echo '<tr>';
+					echo '<td>' . $item['item_name'] . '</td>';
+					echo '<td>' . $item['classification'] . '</td>';
+					foreach ($categories as $category) {
+						if ($category['id_categories'] == $item['category']){
+							echo '<td>' . $category['categories_name'] . '</td>';
+						}
+					}
+					foreach ($subcategories as $subcategory) {
+						if ($subcategory['id_sub_categories'] == $item['sub_category']){
+							echo '<td>' . $subcategory['sub_category_name'] . '</td>';
+						}
+					}
+					echo '<td>' . $item['artist_name'] . '</td>';
+					echo '<td>' . $item['year_of_production'] . '</td>';
+					echo '<td>' . '£' .$item['estimated_price'] . '</td>';
+					echo '<td><a style="float: right" href="editItems?id_items=' . $item['id_items'] . '">Edit</a></td>';
+					echo '<td><form method="post" action="deleteItems">
+					<input type="hidden" name="id_items" value="' . $item['id_items'] . '" />
+					<input type="submit" name="submit" value="Delete" />
+					</form></td>';
+					echo '</tr>';
+				}
+			}
+				echo '</thead>';
+				echo '</table>';
+
+
+
+			}else{
+				foreach ($items as $item) {
+					echo '<tr>';
+					echo '<td>' . $item['item_name'] . '</td>';
+					echo '<td>' . $item['classification'] . '</td>';
+					foreach ($categories as $category) {
+						if ($category['id_categories'] == $item['category']){
+							echo '<td>' . $category['categories_name'] . '</td>';
+						}
+					}
+					foreach ($subcategories as $subcategory) {
+						if ($subcategory['id_sub_categories'] == $item['sub_category']){
+							echo '<td>' . $subcategory['sub_category_name'] . '</td>';
+						}
+					}
+					echo '<td>' . $item['artist_name'] . '</td>';
+					echo '<td>' . $item['year_of_production'] . '</td>';
+					echo '<td>' . '£' .$item['estimated_price'] . '</td>';
+					echo '<td><a style="float: right" href="editItems?id_items=' . $item['id_items'] . '">Edit</a></td>';
+					echo '<td><form method="post" action="deleteItems">
+					<input type="hidden" name="id_items" value="' . $item['id_items'] . '" />
+					<input type="submit" name="submit" value="Delete" />
+					</form></td>';
+					echo '</tr>';
+				}
+				echo '</thead>';
+				echo '</table>';
 			}
 
-			echo '</thead>';
-			echo '</table>';
-  ?>
 
-	<?php var_dump($_POST['sortBy']['sub_category']);?>
+  ?>
 </section>
 <?php
 }else{
