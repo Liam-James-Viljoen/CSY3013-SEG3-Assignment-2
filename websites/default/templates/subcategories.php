@@ -31,7 +31,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
         }
 
 				echo '<td><a style="float: right" href="editSubcategories?id_sub_categories=' . $subcategory['id_sub_categories'] . '">Edit</a></td>';
-				echo '<td><form method="post" action="deleteCategories">
+				echo '<td><form method="post" action="deleteSubcategories">
 				<input type="hidden" name="id_sub_categories" value="' . $subcategory['id_sub_categories'] . '" />
 				<input type="submit" name="submit" value="Delete" />
 				</form></td>';

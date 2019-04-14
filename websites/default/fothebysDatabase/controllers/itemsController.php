@@ -7,13 +7,13 @@ class itemsController {
 		$this->itemsTable = $itemsTable;
 	}
 
-	public function items(){
+	public function items($categoryNames, $subcategoryNames, $classifications){
 		$itemsTable = $this->itemsTable->findAll();
 
 		return [
 			'template' => 'items.php',
 			'title' => 'items',
-			'variables' => ['items' => $itemsTable]
+			'variables' => ['items' => $itemsTable, 'classifications' => $classifications, 'categories' => $categoryNames, 'subcategories' => $subcategoryNames]
 		];
 	}
 

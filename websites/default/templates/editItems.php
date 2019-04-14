@@ -36,7 +36,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
         <label>Category</label>
         <Select name="items[category]">
         <?php
-        foreach ($categories as $category){ if ($items['category'] == $category['categories_name']){ ?>
+        foreach ($categories as $category){ if ($items['category'] == $category['id_categories']){ ?>
             <option selected="selected" value="<?=$category['id_categories'] ?? ''?>"><?=$category['categories_name'] ?? ''?></option>
           <?php } else { ?>
             <option value="<?=$category['id_categories'] ?? ''?>"><?=$category['categories_name'] ?? ''?></option>
@@ -53,7 +53,11 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
                   <optgroup label="<?=$category['categories_name'] ?? ''?>">
                           <?php foreach ($subcategories as $subcategory) { ?>
                                 <?php if ($subcategory['id_categories_sub_categories'] == $category['id_categories']){?>
-                                      <option value="<?=$subcategory['sub_category_name'] ?? ''?>"><?=$subcategory['sub_category_name'] ?? ''?></option>
+																			<?php if ($items['sub_category'] == $subcategory['id_sub_categories']){ ?>
+																				<option selected="selected" value="<?=$subcategory['id_sub_categories'] ?? ''?>"><?=$subcategory['sub_category_name'] ?? ''?></option>
+																			<?php } else { ?>
+																				<option value="<?=$subcategory['id_sub_categories'] ?? ''?>"><?=$subcategory['sub_category_name'] ?? ''?></option>
+																			<?php } ?>
                                 <?php } ?>
                           <?php } ?>
                   <?php } ?>
@@ -76,7 +80,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 				<input type="number" name="items[estimated_price]" min="00.00" step="1000.00" value="<?php echo $items['estimated_price']; ?>" />
 
 				<Label>Description</label>
-				<textarea name="items[description]" rows="10" cols="30" value="<?php echo $items['description']; ?>"> </textarea>
+				<textarea name="items[description]" rows="10" cols="30"><?php echo $items['description']; ?></textarea>
 
 				<Label>Assigned Auction</label>
 					<Select name="items[assigned_auction]">
